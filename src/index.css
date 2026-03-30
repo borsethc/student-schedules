@@ -1,0 +1,398 @@
+:root {
+    /* Color Palette - Central High School Minutemen (Light Theme with Red & Black) */
+    --primary: #dc2626; /* Vibrant Red */
+    --primary-hover: #b91c1c; /* Darker Red */
+    --primary-light: #fee2e2; /* Very light red */
+    --bg-color: #f8fafc; /* Light Slate Gray */
+    --card-bg: #ffffff; /* White Cards */
+    --text-main: #0f172a; /* Near Black Text */
+    --text-muted: #64748b; /* Subtle Gray Text */
+    --border-color: #e2e8f0; /* Light Gray Borders */
+    --danger: #ef4444;
+    --danger-light: #fef2f2;
+    --success: #10b981;
+    --success-light: #ecfdf5;
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+input, textarea {
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    user-select: auto;
+}
+
+::-webkit-scrollbar {
+    display: none; /* Hide scrollbars for cleaner app feel on mobile */
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: #e2e8f0; /* Dark background outside container */
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overscroll-behavior-y: none; /* Prevents pull-to-refresh bumping */
+}
+
+#root {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* App Container (Mobile Simulator on Desktop, Full screen on mobile) */
+.app-container {
+    width: 100%;
+    max-width: 480px;
+    background-color: var(--bg-color);
+    min-height: 100dvh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-lg);
+}
+
+/* Header */
+.app-header {
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--primary-light) 200%);
+    padding: calc(20px + env(safe-area-inset-top)) 24px 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.school-logo {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+}
+
+.app-header h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.settings-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-btn:hover {
+    background-color: var(--primary-light);
+    color: var(--primary);
+}
+
+/* Main Area */
+.app-content {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+}
+
+.view {
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Typography Utilities */
+.section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-main);
+}
+
+/* Buttons */
+button {
+    font-family: var(--font-family);
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.primary-btn {
+    width: 100%;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+.primary-btn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.primary-btn:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.secondary-btn {
+    width: 100%;
+    background-color: white;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 12px 20px;
+    font-size: 1rem;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 0;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    color: var(--text-main);
+}
+
+/* Forms & Inputs */
+input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 16px; /* Exactly 16px prevents iOS browser auto-zoom */
+    font-family: var(--font-family);
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* Lists & Cards */
+.student-list, .schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.student-card, .schedule-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.student-card:hover {
+    border-color: var(--primary);
+    background-color: var(--primary-light);
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.125rem;
+    flex-shrink: 0;
+}
+
+.student-info h4 {
+    font-size: 1rem;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.student-info p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* Schedule specific */
+.schedule-card {
+    cursor: default;
+    padding: 12px 16px;
+}
+
+.schedule-card.active-period {
+    border-left: 4px solid var(--primary);
+    background-color: var(--primary-light);
+}
+
+.period-badge {
+    background-color: var(--bg-color);
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    min-width: 44px;
+    text-align: center;
+}
+
+.active-period .period-badge {
+    background-color: var(--primary);
+    color: white;
+}
+
+.class-details h4 {
+    margin-bottom: 4px;
+    font-size: 1rem;
+}
+
+.class-details p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* Profile Header */
+.profile-card {
+    text-align: center;
+    padding: 24px 0;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+    margin: 0 auto 16px auto;
+}
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.profile-id {
+    color: var(--text-muted);
+}
+
+/* Upload UI */
+.upload-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.file-upload-wrapper {
+    position: relative;
+    width: 100%;
+}
+.file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 32px 20px;
+    background-color: var(--bg-color);
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-main);
+    transition: all 0.2s;
+    margin: 20px 0;
+}
+.file-label:hover, .file-label.dragover {
+    background-color: var(--primary-light);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.empty-state svg {
+    color: var(--border-color);
+}
