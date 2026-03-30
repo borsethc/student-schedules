@@ -14,6 +14,9 @@ export function ScheduleView({ student, onBack }: ScheduleViewProps) {
       // Basic numeric extraction for sorting by period, assuming 'A', '1', '1A' formats
       const aVal = parseInt(a.period.replace(/[^0-9]/g, ''), 10) || 99;
       const bVal = parseInt(b.period.replace(/[^0-9]/g, ''), 10) || 99;
+      if (aVal === bVal) {
+        return a.period.localeCompare(b.period);
+      }
       return aVal - bVal;
     });
   }, [student.schedules]);
